@@ -5,63 +5,59 @@ using UnityEngine;
 
 public class GenerateMap : MonoBehaviour
 {
+    // ground=0, collidables=1, scenery=2
+    enum options {ground, collidables, scenery};
 
+    /*
+        [0] -> 
+        [1] -> 
+        [3] ->
+        .
+        .
+        .
+    */
     public TileBase[] tb;
-    public TileBase[] tb1;
-    private Tilemap tm1, tm2;
-    private GameObject go1, go2;
+
+    // declaring game objects and the three essential tilemap layers
+    private GameObject go;
+    private Tilemap layerA, layerB, layerC;
+
+    // generates a tilemap with sortingOrder = sort and a name
+    void createLayer(ref GameObject go, ref Tilemap tm, int sort, string gameObjectName)
+    {
+        // initialize and set components of game object
+        go = new GameObject(gameObjectName);
+        go.transform.parent = gameObject.transform;
+        tm = go.AddComponent(typeof(Tilemap)) as Tilemap;
+
+        // create a renderer for the tilemap
+        TilemapRenderer tr = go.AddComponent(typeof(TilemapRenderer)) as TilemapRenderer;
+        tr.sortingOrder = sort;
+    }
+
     void Start()
     {
-        // create base tiles
-        go1 = new GameObject("base");
-        go1.transform.parent = gameObject.transform;
-        tm1 = go1.AddComponent(typeof(Tilemap)) as Tilemap;
-        TilemapRenderer tr1 = go1.AddComponent(typeof(TilemapRenderer)) as TilemapRenderer;
-        tr1.sortingOrder = 0;
-
-        // create road tiles
-        go2 = new GameObject("roads");
-        go2.transform.parent = gameObject.transform;
-        tm2 = go2.AddComponent(typeof(Tilemap)) as Tilemap;
-        TilemapRenderer tr2 = go2.AddComponent(typeof(TilemapRenderer)) as TilemapRenderer;
-        tr2.sortingOrder = 1;
-
-        GenerateBaseTiles();
-        GenerateRoadTiles();
+        // generate ground layer of tiles
+        createLayer(ref go, ref layerA, 0, "base");
+        GenerateTiles(ref layerA, (int)options.ground);
     }
 
-    // array [plain, vertical, horizontal, split]
-    void GenerateBaseTiles()
+    void GenerateTiles(ref Tilemap tm, int option)
     {
-        for (int x = 0; x < 22; x++) {
-            for (int y = 0; y < 10; y++) {
-                tm1.SetTile(new Vector3Int(x, y, 0), tb[0]);                
-            }
-        }
-    }
-
-    void GenerateRoadTiles()
-    {   
-        // 1) randomly select a coordinate(x, 0)
-        // 2) place that coordinate and keep track of x
-        // 3) place another tile at (x, 1)...(x, 2)...
-        // 4) 0-road vertical
-        //    1-road horizontal
-        //    2-road split
-        //    3-road turn up left
-        //    4-road turn up right
-        int y = 0;
-        int x = Random.Range(0, 22);
-        int road = Random.Range(0, 5);
-        int last_road;
-        while(y <= 10) {
-            if (y == 0) {
-                tm2.SetTile(new Vector3Int(x, y, 0), tb1[0]);
-            } else {
-                tm2.SetTile(new Vector3Int(x, y, 0), tb1[road]);
-                last_road = x;
-            }
-            y++;
+        switch (option) {
+            // generate layerA (strictly ground tiles / non-collidable)
+            case 0:
+               for (int x=0; x < 22; x++)
+                   for (int y=0; y < 30; y++) {
+                        tm.SetTile(new Vector3Int(x, y, 0), tb[0]);
+                   }
+                break;
+            // generate layerB (paths)
+            case 1:
+                break;
+            // generate layerC (spawners and scenery)
+            case 2:
+                break;
         }
     }
 }

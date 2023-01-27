@@ -5,8 +5,6 @@ using UnityEngine;
 public class CameraBehavior : MonoBehaviour
 {
     public Transform target;
-    public float xOffset;
-    public float yOffest;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,7 +14,7 @@ public class CameraBehavior : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        transform.position = new Vector3(target.position.x, target.position.y, transform.position.z);
+        transform.position = new Vector3(target.position.x-6, target.position.y-4, transform.position.z);
     }
 
 

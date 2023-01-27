@@ -5,59 +5,73 @@ using UnityEngine;
 
 public class GenerateMap : MonoBehaviour
 {
-    // ground=0, collidables=1, scenery=2
-    enum options {ground, collidables, scenery};
+    // declare arrays holding layer game objects, tilemaps, and tilemap renderers
+    private GameObject layerAGo, layerBGo, layerCGo;
+    private Tilemap layerAtm, layerBtm, layerCtm;
+    private TilemapRenderer layerAtr, layerBtr, layerCtr;
 
-    /*
-        [0] -> 
-        [1] -> 
-        [3] ->
-        .
-        .
-        .
-    */
-    public TileBase[] tb;
+    // declare 3 TileBase arrays to hold tilebases for the 3 essential layers
+    public TileBase[] tbLayerA;
+    public TileBase[] tbLayerB;
+    public TileBase[] tbLayerC;
 
-    // declaring game objects and the three essential tilemap layers
-    private GameObject go;
-    private Tilemap layerA, layerB, layerC;
-
-    // generates a tilemap with sortingOrder = sort and a name
-    void createLayer(ref GameObject go, ref Tilemap tm, int sort, string gameObjectName)
+    void GenerateTiles()
     {
-        // initialize and set components of game object
-        go = new GameObject(gameObjectName);
-        go.transform.parent = gameObject.transform;
-        tm = go.AddComponent(typeof(Tilemap)) as Tilemap;
+        for (int x=0; x < 22; x++) 
+        {
+            for (int y = 0; y < 30; y++) 
+            {
+                layerAtm.SetTile(new Vector3Int(x, y, 0), tbLayerA[0]);
+            }
+        }
 
-        // create a renderer for the tilemap
-        TilemapRenderer tr = go.AddComponent(typeof(TilemapRenderer)) as TilemapRenderer;
-        tr.sortingOrder = sort;
+        for (int x = 0; x < 22; x+=4)
+        {
+            for (int y = 0; y < 30; y+=4)
+            {
+                layerBtm.SetTile(new Vector3Int(x, y, 0), tbLayerB[0]);
+            }
+        }
+
+        for (int x = 0; x < 22; x+=2)
+        {
+            for (int y = 0; y < 30; y+=2)
+            {
+                layerCtm.SetTile(new Vector3Int(x, y, 0), tbLayerC[0]);
+            }
+        }
     }
 
     void Start()
     {
-        // generate ground layer of tiles
-        createLayer(ref go, ref layerA, 0, "base");
-        GenerateTiles(ref layerA, (int)options.ground);
-    }
+        // initialize ground tiles
+        layerAGo = new GameObject("layerA");
+        layerAGo.transform.parent = gameObject.transform;
+        layerAtm = new Tilemap();
+        layerAtm = layerAGo.AddComponent(typeof(Tilemap)) as Tilemap;
+        layerAtr = new TilemapRenderer();
+        layerAtr = layerAGo.AddComponent(typeof(TilemapRenderer)) as TilemapRenderer;
+        layerAtr.sortingOrder = 0;
 
-    void GenerateTiles(ref Tilemap tm, int option)
-    {
-        switch (option) {
-            // generate layerA (strictly ground tiles / non-collidable)
-            case 0:
-               for (int x=0; x < 22; x++)
-                   for (int y=0; y < 30; y++) {
-                        tm.SetTile(new Vector3Int(x, y, 0), tb[0]);
-                   }
-                break;
-            // generate layerB (paths)
-            case 1:
-                break;
-            // generate layerC (spawners and scenery)
-            case 2:
-                break;
-        }
-    }
+        // initialize obstacle tiles
+        layerBGo = new GameObject("layerB");
+        layerBGo.transform.parent = gameObject.transform;
+        layerBtm = new Tilemap();
+        layerBtm = layerBGo.AddComponent(typeof(Tilemap)) as Tilemap;
+        layerBtr = new TilemapRenderer();
+        layerBtr = layerBGo.AddComponent(typeof(TilemapRenderer)) as TilemapRenderer;
+        layerBtr.sortingOrder = 1;
+
+        // initialize spawner tiles
+        layerCGo = new GameObject("layerC");
+        layerCGo.transform.parent = gameObject.transform;
+        layerCtm = new Tilemap();
+        layerCtm = layerCGo.AddComponent(typeof(Tilemap)) as Tilemap;
+        layerCtr = new TilemapRenderer();
+        layerCtr = layerCGo.AddComponent(typeof(TilemapRenderer)) as TilemapRenderer;
+        layerCtr.sortingOrder = 2;
+
+        // generate tiles
+        GenerateTiles();
+    }    
 }

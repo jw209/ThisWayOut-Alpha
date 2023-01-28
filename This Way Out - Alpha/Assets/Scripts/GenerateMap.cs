@@ -17,22 +17,22 @@ public class GenerateMap : MonoBehaviour
 
     void GenerateTiles()
     {
-        for (int x=0; x < 22; x++) 
+        for (int x = -11; x <= 11; x++) 
         {
-            for (int y = 0; y < 30; y++) 
+            for (int y = -10; y < 20; y++) 
             {
                 layerAtm.SetTile(new Vector3Int(x, y, 0), tbLayerA[0]);
             }
         }
 
-        for (int x = 0; x < 22; x+=4)
+        for (int x = -11; x <= 11; x++)
         {
-            for (int y = 0; y < 30; y+=4)
+            for (int y = -10; y <= 20; y++)
             {
                 layerBtm.SetTile(new Vector3Int(x, y, 0), tbLayerB[0]);
             }
         }
-
+        /*
         for (int x = 0; x < 22; x+=2)
         {
             for (int y = 0; y < 30; y+=2)
@@ -40,6 +40,7 @@ public class GenerateMap : MonoBehaviour
                 layerCtm.SetTile(new Vector3Int(x, y, 0), tbLayerC[0]);
             }
         }
+        */
     }
 
     void Start()

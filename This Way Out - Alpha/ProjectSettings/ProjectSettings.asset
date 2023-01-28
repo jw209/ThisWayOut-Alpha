@@ -603,8 +603,8 @@ PlayerSettings:
   apiCompatibilityLevelPerPlatform: {}
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
-  metroPackageName: This Way Out - Alpha
-  metroPackageVersion: 
+  metroPackageName: ThisWayOut-Alpha
+  metroPackageVersion: 1.0.0.0
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 
@@ -612,7 +612,7 @@ PlayerSettings:
   metroCertificateNotAfter: 0000000000000000
   metroApplicationDescription: This Way Out - Alpha
   wsaImages: {}
-  metroTileShortName: 
+  metroTileShortName: This Way Out - Alpha
   metroTileShowName: 0
   metroMediumTileShowName: 0
   metroLargeTileShowName: 0

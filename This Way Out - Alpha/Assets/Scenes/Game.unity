@@ -219,6 +219,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 1648677050}
   cameraSpeed: 2
+  minimumY: -3
 --- !u!81 &450695060
 AudioListener:
   m_ObjectHideFlags: 0
@@ -412,3 +413,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 3
+  leftBound: -9.6
+  rightBound: 9.6
+  lowBound: -7.7

@@ -8,12 +8,11 @@ public class PlayerMovement : MonoBehaviour
     public float leftBound, rightBound, lowBound;
     private Animator animator;
 
-    void Start()
+    void Awake()
     {
         animator = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0
@@ -33,14 +32,12 @@ public class PlayerMovement : MonoBehaviour
             {
                 transform.position = new Vector3(transform.position.x, lowBound, transform.position.z);
             }
-
             animator.SetBool("isWalking", false);
         }
-
-        
     }
 
-    void Move() {
+    void Move() 
+    {
         float x = Input.GetAxis("Horizontal") * Time.deltaTime * moveSpeed;
         float y = Input.GetAxis("Vertical") * Time.deltaTime * moveSpeed;
         animator.SetFloat("walkHorizontal", x);

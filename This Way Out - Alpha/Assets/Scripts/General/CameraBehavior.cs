@@ -19,26 +19,28 @@ public class CameraBehavior : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        screenCenter = Screen.height / 2;
+        if (target) {
+            screenCenter = Screen.height / 2;
 
-        if (((target.position.y + screenCenter) - screenCenter) > 20)
-        {
-            change = Mathf.Lerp(transform.position.y, target.position.y,
-                                Time.deltaTime / cameraSpeed);
-            transform.position = new Vector3(transform.position.x, 
-                                             change,
-                                             transform.position.z);
-        } else if (((target.position.y + screenCenter) - screenCenter) < 20 && (transform.position.y >= minimumY))
-        {
-            change = Mathf.Lerp(transform.position.y, target.position.y, 
-                                Time.deltaTime / cameraSpeed);
-            transform.position = new Vector3(transform.position.x,
-                                             change,
-                                             transform.position.z);
-        }
-        if (transform.position.y <= minimumY)
-        {
-            transform.position = new Vector3(transform.position.x, minimumY, transform.position.z);
+            if (((target.position.y + screenCenter) - screenCenter) > 20)
+            {
+                change = Mathf.Lerp(transform.position.y, target.position.y,
+                                    Time.deltaTime / cameraSpeed);
+                transform.position = new Vector3(transform.position.x, 
+                                                change,
+                                                transform.position.z);
+            } else if (((target.position.y + screenCenter) - screenCenter) < 20 && (transform.position.y >= minimumY))
+            {
+                change = Mathf.Lerp(transform.position.y, target.position.y, 
+                                    Time.deltaTime / cameraSpeed);
+                transform.position = new Vector3(transform.position.x,
+                                                change,
+                                                transform.position.z);
+            }
+            if (transform.position.y <= minimumY)
+            {
+                transform.position = new Vector3(transform.position.x, minimumY, transform.position.z);
+            }
         }
     }
 }

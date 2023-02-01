@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class PlayerCollision : MonoBehaviour
 {
-    [SerializeField] GameObject healthSystem;
-
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.tag == "Enemy")
+        if (col.gameObject.tag == "Frog")
         {
-            healthSystem.GetComponent<HealthSystem>().takeDamage();
+            this.gameObject.GetComponent<PlayerStats>()
+                .takeDamage(col.gameObject.GetComponent<FrogStats>().attackDamage);
         }
     }
 }

@@ -17,6 +17,7 @@ public class GenerateMap : MonoBehaviour
 
     void GenerateTiles()
     {
+        
         for (int x = -11; x <= 11; x++) 
         {
             for (int y = -10; y < 20; y++) 
@@ -32,15 +33,13 @@ public class GenerateMap : MonoBehaviour
                 layerBtm.SetTile(new Vector3Int(x, y, 0), tbLayerB[0]);
             }
         }
-        /*
-        for (int x = 0; x < 22; x+=2)
-        {
-            for (int y = 0; y < 30; y+=2)
-            {
-                layerCtm.SetTile(new Vector3Int(x, y, 0), tbLayerC[0]);
-            }
-        }
-        */
+
+        int spawnerAlocX = Random.Range(-11, 11);
+        int spawnerAlocY = Random.Range(-10, 20);
+        int spawnerBlocX = Random.Range(-11, 11);
+        int spawnerBlocY = Random.Range(-10, 20);
+        layerCtm.SetTile(new Vector3Int(spawnerAlocX, spawnerAlocY, 0), tbLayerA[1]);
+        layerCtm.SetTile(new Vector3Int(spawnerBlocX, spawnerBlocY, 0), tbLayerA[1]);
     }
 
     void Start()

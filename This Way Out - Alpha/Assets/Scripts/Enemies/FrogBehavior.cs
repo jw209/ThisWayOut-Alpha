@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FrogBehavior : MonoBehaviour
 {
-    [SerializeField] private Transform target;
+    private Transform target;
     [SerializeField] private float movementSpeed;
     [SerializeField] private int frogHealth;
     private Rigidbody2D rb;
@@ -13,6 +13,7 @@ public class FrogBehavior : MonoBehaviour
 
     void Awake()
     {
+        target = GameObject.FindGameObjectWithTag("Player").transform;
         isJumping = false;
         rb = GetComponent<Rigidbody2D>();
     }

@@ -170,7 +170,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 1648677050}
   guideSpeed: 300
-  prefab: {fileID: 3245575939205629400, guid: 27b9f9a59c1a0b746aa901993c0355d3, type: 3}
+  prefab: {fileID: 8656112937551173527, guid: 0f848fcaa01a96945a93a8b850ea01df, type: 3}
 --- !u!212 &81832797
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -8,8 +8,12 @@ public class FrogCollision : MonoBehaviour
     {
         if (col.gameObject.tag == "Bullet")
         {
+            // frog takes damage
             this.gameObject.GetComponent<FrogStats>()
                 .takeDamage(col.gameObject.GetComponent<BulletStats>().attackDamage);
+            
+            // destroy bullet
+            Destroy(col.gameObject);
         }
     }
 }

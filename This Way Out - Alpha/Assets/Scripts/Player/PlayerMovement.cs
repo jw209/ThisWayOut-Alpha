@@ -4,34 +4,30 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    private PlayerStats playerStats;
     public float moveSpeed;
-    public float leftBound, rightBound, lowBound;
-    private Animator animator;
+    private Animator animator;  
 
     void Awake()
-    {
+    {   
+        // get player stats
+        playerStats = GameObject.FindWithTag("Player").GetComponent<PlayerStats>();
+        moveSpeed = playerStats.moveSpeed;
+
+        // get animator
         animator = GetComponent<Animator>();
     }
 
     void FixedUpdate()
-    {
-        if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0
-            && transform.position.x > leftBound && transform.position.x < rightBound)
+    {   
+        // handle movement
+        if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
         {
             animator.SetBool("isWalking", true);
             Move();
-        } else 
+        } 
+        else
         {
-            if (transform.position.x <= leftBound)
-            {
-                transform.position = new Vector3(leftBound, transform.position.y, transform.position.z);
-            } else if (transform.position.x >= rightBound)
-            {
-                transform.position = new Vector3(rightBound, transform.position.y, transform.position.z);
-            } else if (transform.position.y <= lowBound)
-            {
-                transform.position = new Vector3(transform.position.x, lowBound, transform.position.z);
-            }
             animator.SetBool("isWalking", false);
         }
     }

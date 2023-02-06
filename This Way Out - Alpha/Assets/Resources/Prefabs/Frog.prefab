@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 2775744452270743097}
   - component: {fileID: 2775744452270743079}
   - component: {fileID: 2775744452270743072}
+  - component: {fileID: 2818883099901211348}
   m_Layer: 0
   m_Name: Frog
   m_TagString: Frog
@@ -36,7 +37,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2775744452270743077
 SpriteRenderer:
@@ -136,7 +137,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &2775744452270743098
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -169,7 +170,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.15469301}
+  m_Offset: {x: -0.0063296556, y: -0.15469301}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -180,7 +181,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.58205724}
+  m_Size: {x: 1.0126593, y: 0.58205724}
   m_EdgeRadius: 0
 --- !u!114 &2775744452270743097
 MonoBehaviour:
@@ -194,7 +195,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58c71bcc12bf3184db4732437946603d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
   movementSpeed: 5
   frogHealth: 10
 --- !u!114 &2775744452270743079
@@ -225,3 +225,81 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94b780661f51913448841f8985433204, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!68 &2818883099901211348
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2775744452270743096}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -0.31432965, y: -0.24934292}
+  - {x: -0.31353968, y: -0.30283165}
+  - {x: -0.31155732, y: -0.43705416}
+  - {x: -0.18071926, y: -0.43692732}
+  - {x: -0.18405563, y: -0.37241077}
+  - {x: -0.24617197, y: -0.3708477}
+  - {x: -0.2452788, y: -0.31743288}
+  - {x: 0.2581109, y: -0.31570578}
+  - {x: 0.25303978, y: -0.37017584}
+  - {x: 0.18546604, y: -0.36193705}
+  - {x: 0.18870786, y: -0.44851923}
+  - {x: 0.32724172, y: -0.44245625}
+  - {x: 0.31968263, y: -0.2602806}
+  - {x: 0.24969755, y: -0.249856}
+  - {x: 0.25521073, y: -0.19880724}
+  - {x: 0.49401915, y: -0.19063711}
+  - {x: 0.49835598, y: 0.05815935}
+  - {x: 0.4524188, y: 0.063964844}
+  - {x: 0.445694, y: 0.13087225}
+  - {x: 0.2116905, y: 0.13183641}
+  - {x: 0.18471001, y: 0.08033228}
+  - {x: 0.13659856, y: 0.07345295}
+  - {x: 0.12286803, y: 0.0034914017}
+  - {x: 0.06399876, y: 0.0035600662}
+  - {x: 0.06487829, y: -0.055593014}
+  - {x: -0.052029517, y: -0.058475494}
+  - {x: -0.055219408, y: -0.00097608566}
+  - {x: -0.109037675, y: 0.00040912628}
+  - {x: -0.1221949, y: 0.065983295}
+  - {x: -0.17229635, y: 0.06557703}
+  - {x: -0.17358105, y: 0.12591934}
+  - {x: -0.42957366, y: 0.12954473}
+  - {x: -0.44304866, y: 0.057424545}
+  - {x: -0.49100304, y: 0.05813694}
+  - {x: -0.4912168, y: -0.17788172}
+  - {x: -0.27572194, y: -0.17261648}
+  - {x: -0.265209, y: -0.21274137}
+  - {x: -0.27164468, y: -0.24687338}
+  - {x: -0.37524146, y: -0.25172186}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0

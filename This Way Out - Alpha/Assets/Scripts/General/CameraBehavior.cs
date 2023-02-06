@@ -11,7 +11,7 @@ public class CameraBehavior : MonoBehaviour
     private float change;
     
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         transform.position = new Vector3(transform.position.x, target.position.y - 2.5f, transform.position.z);
     }
@@ -43,4 +43,27 @@ public class CameraBehavior : MonoBehaviour
             }
         }
     }
+
+    public void ShiftCamera(int shiftDirection)
+    {
+        switch(shiftDirection)
+        {
+            // shift camera to the left
+            case 0:
+                change = Mathf.Lerp(transform.position.x, transform.position.x-22f, Time.deltaTime / cameraSpeed);
+                transform.position = new Vector3(change, transform.position.y, transform.position.z);                
+                break;
+            // shift camera to the right
+            case 1:
+                change = Mathf.Lerp(transform.position.x, transform.position.x+22f, Time.deltaTime / cameraSpeed);
+                transform.position = new Vector3(change, transform.position.y, transform.position.z);    
+                break;
+            // shift camera to the center
+            case 2:
+                change = Mathf.Lerp(transform.position.y, transform.position.y+30, Time.deltaTime / cameraSpeed);
+                transform.position = new Vector3(transform.position.x, change, transform.position.z);    
+                break;
+        }
+    }
+    
 }

@@ -17,6 +17,13 @@ public class WorldBehavior : MonoBehaviour
     // Current instance of the map
     private GameObject currentMap;
 
+    // new position of the map
+    private Vector3 oldPosition;
+    private Vector3 newPosition;
+
+    // if the player has crossed a bound, tell camera to shift
+    public int shiftDirection = 0;
+
     void Awake()
     {
         // Instantiate the first map
@@ -28,29 +35,29 @@ public class WorldBehavior : MonoBehaviour
         // Check if the player has crossed the bound of the current map
         if (player.position.x >= currentMap.transform.position.x + MAP_WIDTH)
         {
-            Vector3 oldPosition = currentMap.transform.position;
-            Vector3 newPosition = new Vector3(oldPosition.x + MAP_WIDTH, oldPosition.y, oldPosition.z);
+            oldPosition = currentMap.transform.position;
+            newPosition = new Vector3(oldPosition.x + MAP_WIDTH, oldPosition.y, oldPosition.z);
             Destroy(currentMap);
             currentMap = Instantiate(mapPrefab, newPosition, Quaternion.identity);
         }
         else if (player.position.x <= currentMap.transform.position.x)
         {
-            Vector3 oldPosition = currentMap.transform.position;
-            Vector3 newPosition = new Vector3(oldPosition.x - MAP_WIDTH, oldPosition.y, oldPosition.z);
+            oldPosition = currentMap.transform.position;
+            newPosition = new Vector3(oldPosition.x - MAP_WIDTH, oldPosition.y, oldPosition.z);
             Destroy(currentMap);
             currentMap = Instantiate(mapPrefab, newPosition, Quaternion.identity);
         }
         else if (player.position.y >= currentMap.transform.position.y + MAP_HEIGHT)
         {
-            Vector3 oldPosition = currentMap.transform.position;
-            Vector3 newPosition = new Vector3(oldPosition.x, oldPosition.y + MAP_HEIGHT, oldPosition.z);
+            oldPosition = currentMap.transform.position;
+            newPosition = new Vector3(oldPosition.x, oldPosition.y + MAP_HEIGHT, oldPosition.z);
             Destroy(currentMap);
             currentMap = Instantiate(mapPrefab, newPosition, Quaternion.identity);
         }
         else if (player.position.y <= currentMap.transform.position.y)
         {
-            Vector3 oldPosition = currentMap.transform.position;
-            Vector3 newPosition = new Vector3(oldPosition.x, oldPosition.y - MAP_HEIGHT, oldPosition.z);
+            oldPosition = currentMap.transform.position;
+            newPosition = new Vector3(oldPosition.x, oldPosition.y - MAP_HEIGHT, oldPosition.z);
             Destroy(currentMap);
             currentMap = Instantiate(mapPrefab, newPosition, Quaternion.identity);
         }

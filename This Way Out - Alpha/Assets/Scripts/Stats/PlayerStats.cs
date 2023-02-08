@@ -6,6 +6,7 @@ public class PlayerStats : MonoBehaviour
 {
     public float moveSpeed;
     public int currentHealth;
+    public int level;
 
     public void takeDamage(int incomingDamage)
     {
@@ -16,4 +17,6 @@ public class PlayerStats : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+
+    
 }

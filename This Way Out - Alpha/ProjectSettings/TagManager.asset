@@ -8,6 +8,8 @@ TagManager:
   - Bullet
   - Frog
   - MapGenerator
+  - Map
+  - xp
   layers:
   - Default
   - TransparentFX

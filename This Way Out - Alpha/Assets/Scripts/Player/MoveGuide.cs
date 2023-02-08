@@ -39,7 +39,7 @@ public class MoveGuide : MonoBehaviour
             bulletCounter++;
 
             // reset bullet counter
-            if (bulletCounter == 100)
+            if (bulletCounter == 50)
                 bulletCounter = 0;
         }
     }

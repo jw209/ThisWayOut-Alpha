@@ -4,6 +4,17 @@ using UnityEngine;
 
 public class FrogBehavior : MonoBehaviour
 {
+    // FROG STATS 
+    public int attackDamage;
+    public float attackSpeed;
+    public float moveSpeed;
+    public int currentHealth;
+    public int deadFrogs;
+
+    // XP
+    private GameObject UIxp;
+
+    // FROG BEHAVIOR
     private Transform target;
     [SerializeField] private float movementSpeed;
     [SerializeField] private int frogHealth;
@@ -14,8 +25,20 @@ public class FrogBehavior : MonoBehaviour
     void Awake()
     {
         target = GameObject.FindGameObjectWithTag("Player").transform;
+        UIxp = GameObject.FindWithTag("xp");
         isJumping = false;
         rb = GetComponent<Rigidbody2D>();
+    }
+
+    // FROG STAT METHODS
+    public void takeDamage()
+    {
+        currentHealth -= 1;
+
+        if (currentHealth <= 0)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     void Update()
@@ -44,6 +67,23 @@ public class FrogBehavior : MonoBehaviour
     void EndJump()
     {
         isJumping = false;
+    }
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.tag == "Bullet")
+        {
+            // take damage
+            takeDamage();
+            
+            // destroy bullet
+            Destroy(col.gameObject);
+        }
+    }
+    
+    void OnDestroy()
+    {
+        UIxp.SendMessage("NextLevel", SendMessageOptions.RequireReceiver);
     }
 }
 

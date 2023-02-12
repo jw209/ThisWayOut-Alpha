@@ -10,11 +10,14 @@ TagManager:
   - MapGenerator
   - Map
   - xp
+  - GameManager
+  - Hearts
+  - heart
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Logic
   - Water
   - UI
   - 

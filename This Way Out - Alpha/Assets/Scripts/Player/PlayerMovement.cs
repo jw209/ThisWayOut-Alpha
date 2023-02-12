@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private PlayerStats playerStats;
+   // private PlayerStats playerStats;
     public float moveSpeed;
     private Animator animator;  
 
     void Awake()
     {   
         // get player stats
-        playerStats = GameObject.FindWithTag("Player").GetComponent<PlayerStats>();
-        moveSpeed = playerStats.moveSpeed;
+        //playerStats = GameObject.FindWithTag("Player").GetComponent<PlayerStats>();
+        //moveSpeed = playerStats.moveSpeed;
 
         // get animator
         animator = GetComponent<Animator>();

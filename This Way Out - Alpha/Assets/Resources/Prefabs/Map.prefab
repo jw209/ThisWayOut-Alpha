@@ -47,15 +47,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9945f1dd76595e49929a4f3cd9c39dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstacles:
-  - {fileID: 1329108239127763806, guid: d4bd86da4fff2594dac48ec62f9b314d, type: 3}
-  - {fileID: 133325198524684916, guid: 0a128da275e59704596f257b8e6d76e4, type: 3}
-  - {fileID: 4087516883849435077, guid: 73052cc413013a74fa3be6f13b806304, type: 3}
-  - {fileID: 5921907923926954704, guid: 32269b1af66ba184a83fe0aef97c5c30, type: 3}
-  - {fileID: 2020279264771717143, guid: 697f685600c039044b444d64ae74eba6, type: 3}
-  tbLayer:
-  - {fileID: 11400000, guid: 7b0b090e0da4181408fd8ee200523ec0, type: 2}
-  - {fileID: 11400000, guid: 515fcdfc4a9e3214a9480738103790d2, type: 2}
 --- !u!156049354 &3632456832428377722
 Grid:
   m_ObjectHideFlags: 0

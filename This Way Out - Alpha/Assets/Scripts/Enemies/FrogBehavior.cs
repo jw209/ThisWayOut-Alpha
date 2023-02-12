@@ -12,7 +12,7 @@ public class FrogBehavior : MonoBehaviour
     public int deadFrogs;
 
     // XP
-    private GameObject UIxp;
+    private GameObject gm;
 
     // FROG BEHAVIOR
     private Transform target;
@@ -24,8 +24,8 @@ public class FrogBehavior : MonoBehaviour
 
     void Awake()
     {
+        gm = GameObject.FindWithTag("GameManager");
         target = GameObject.FindGameObjectWithTag("Player").transform;
-        UIxp = GameObject.FindWithTag("xp");
         isJumping = false;
         rb = GetComponent<Rigidbody2D>();
     }
@@ -83,7 +83,8 @@ public class FrogBehavior : MonoBehaviour
     
     void OnDestroy()
     {
-        UIxp.SendMessage("NextLevel", SendMessageOptions.RequireReceiver);
+        // tell game manager that player earned xp for killing a frog
+        gm.SendMessage("IncrementXP", 1);
     }
 }
 

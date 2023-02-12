@@ -4,12 +4,18 @@ using UnityEngine;
 
 public class PlayerCollision : MonoBehaviour
 {
+    private GameObject gm;
+
+    void Awake ()
+    {
+        gm = GameObject.FindWithTag("GameManager");
+    }
+
     void OnTriggerEnter2D(Collider2D col)
     {
         if (col.gameObject.tag == "Frog")
         {
-            this.gameObject.GetComponent<PlayerStats>()
-                .takeDamage(col.gameObject.GetComponent<FrogStats>().attackDamage);
+            gm.SendMessage("UpdateHealth", -1);
         }
     }
 }

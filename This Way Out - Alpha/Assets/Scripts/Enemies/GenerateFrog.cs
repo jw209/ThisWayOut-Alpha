@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class GenerateFrog : MonoBehaviour
 {
-    public GameObject frog;
+    private GameObject frog;
 
     void Awake()
     {
+        // Load the frog prefab
+        frog = Resources.Load("Prefabs/Enemies/level_0/enemy_0") as GameObject;
+
         InvokeRepeating("Generator", 0, 10);
     }
 

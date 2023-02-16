@@ -6,18 +6,18 @@ using System.IO;
 
 public class GenerateMap : MonoBehaviour
 {
-    // map dimensions
+    // Map dimensions
     private const int gridWidth = 22;
     private const int gridHeight = 30;
 
-    // things the script needs to know about
+    // Things the script needs to know about
     private GameManager gm;
     private int level;
     private string tilemaps_path = "Assets/Resources/Tilemaps/Tiles/";
     private string scenery_path = "Assets/Resources/Prefabs/Scenery/";
     private string spawners_path = "Assets/Resources/Prefabs/Spawners/";
 
-    // alert game manager that map is initialized
+    // Alert game manager that map is initialized
     void Awake()
     {
         gm = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
@@ -27,29 +27,29 @@ public class GenerateMap : MonoBehaviour
 
     public void GetResourcesAndBuild()
     {   
-        // get components
+        // Get components
         Grid grid = gameObject.GetComponent<Grid>();
         Tilemap tilemap = gameObject.GetComponent<Tilemap>();
         TilemapRenderer renderer = gameObject.GetComponent<TilemapRenderer>();
 
-        // set sorting
+        // Set sorting
         renderer.sortingOrder = 0;
 
-        // get ground tiles
+        // Get ground tiles
         TileBase[] tiles = new TileBase[Directory.GetFiles(tilemaps_path + "level_" + level).Length/2];
         for (int i = 0; i < Directory.GetFiles(tilemaps_path + "level_" + level).Length/2; i++)
         {
             tiles[i] = Resources.Load<TileBase>("Tilemaps/Tiles/level_" + level + "/tile_" + i);
         }
 
-        // get scenery prefabs
+        // Get scenery prefabs
         GameObject[] scenery = new GameObject[Directory.GetFiles(scenery_path + "level_" + level).Length/2];
         for (int i = 0; i < Directory.GetFiles(scenery_path + "level_" + level).Length/2; i++)
         {
             scenery[i] = Resources.Load<GameObject>("Prefabs/Scenery/level_" + level + "/scenery_" + i);
         }
         
-        // generate ground tiles
+        // Generate ground tiles
         for (int x = -1; x < gridWidth+2; x++)
         {
             for (int y = -1; y < gridHeight+2; y++)
@@ -76,15 +76,15 @@ public class GenerateMap : MonoBehaviour
             }
         }
         
-        // generate scenery
+        // Generate scenery
         Vector3[,] treePositions = new Vector3[4, 12];
-        // populate possible positions for trees
+        // Populate possible positions for trees
         for (int quadrant = 0; quadrant < 4; quadrant++)
         {
             int i = 0;
             switch (quadrant)
             {
-                // bottom left corner of map
+                // Bottom left corner of map
                 case 0:
                     for (int x = 1; x < 9; x += 4)
                     {
@@ -95,7 +95,7 @@ public class GenerateMap : MonoBehaviour
                         }
                     }
                     break;
-                // bottom right corner of map
+                // Bottom right corner of map
                 case 1:
                     for (int x = 13; x < 21; x += 4)
                     {
@@ -106,7 +106,7 @@ public class GenerateMap : MonoBehaviour
                         }
                     }
                     break;
-                // top left corner of map
+                // Top left corner of map
                 case 2:
                     for (int x = 1; x < 9; x += 4)
                     {
@@ -117,7 +117,7 @@ public class GenerateMap : MonoBehaviour
                         }
                     }
                     break;
-                // top right corner of map
+                // Top right corner of map
                 case 3:
                     for (int x = 13; x < 21; x += 4)
                     {
@@ -133,7 +133,7 @@ public class GenerateMap : MonoBehaviour
 
         int numTrees = 24;
         Vector3[] occupiedPositions = new Vector3[numTrees];
-        // generate trees
+        // Generate trees
         for (int i = 0; i < numTrees; i++)
         {
             int quadrant = Random.Range(0, 4);
@@ -145,7 +145,7 @@ public class GenerateMap : MonoBehaviour
             obj.transform.parent = this.gameObject.transform;
         }
 
-        // generate dirt
+        // Generate dirt
         int roadDensity = 300;
         for (int i = 0; i < roadDensity; i++)
         {
@@ -172,7 +172,7 @@ public class GenerateMap : MonoBehaviour
             int quadrant = Random.Range(0, 4);
             int flower = Random.Range(0, 12);
 
-            // check if position is occupied
+            // Check if position is occupied
             if (System.Array.IndexOf(occupiedPositions, treePositions[quadrant,flower]) != -1)
                 continue;
 
@@ -186,7 +186,7 @@ public class GenerateMap : MonoBehaviour
             spawners[i] = Resources.Load<GameObject>("Prefabs/Spawners/level_" + level + "/spawner_" + i);
         }
 
-        // generate spawners
+        // Generate spawners
         int iter = Random.Range(0, 4);
         for (int i = 0; i < iter; i++)
         {

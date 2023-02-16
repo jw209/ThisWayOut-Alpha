@@ -4,46 +4,38 @@ using UnityEngine;
 
 public class FrogBehavior : MonoBehaviour
 {
-    // FROG STATS 
-    public int attackDamage;
-    public float attackSpeed;
-    public float moveSpeed;
-    public int currentHealth;
-    public int deadFrogs;
-
-    // XP
+    // Game Manager
     private GameObject gm;
 
-    // FROG BEHAVIOR
+    // Frog options
+    public int attackDamage = 1;
+    public int currentHealth = 10;
+    public float movementSpeed = 5;
+
+    // External factors
     private Transform target;
-    [SerializeField] private float movementSpeed;
-    [SerializeField] private int frogHealth;
+
+    // Internal variables
     private Rigidbody2D rb;
     private Vector2 moveDirection;
-    private bool isJumping;
+    private bool isJumping = false;
 
     void Awake()
-    {
+    {   
+        // Get the game manager
         gm = GameObject.FindWithTag("GameManager");
+
+        // Get the player's transform
         target = GameObject.FindGameObjectWithTag("Player").transform;
-        isJumping = false;
+
+        // Get the frog's rigidbody
         rb = GetComponent<Rigidbody2D>();
-    }
-
-    // FROG STAT METHODS
-    public void takeDamage()
-    {
-        currentHealth -= 1;
-
-        if (currentHealth <= 0)
-        {
-            Destroy(this.gameObject);
-        }
     }
 
     void Update()
     {
         if (target) {
+            // If player exists, move set the frogs move direction to the player
             Vector3 direction = (target.position - transform.position).normalized;
             moveDirection = direction;
         }
@@ -51,7 +43,7 @@ public class FrogBehavior : MonoBehaviour
 
     void FixedUpdate()
     {
-        // move the frog if the 'isJumping' flag is set by the animation
+        // Move the frog if the 'isJumping' flag is set by the animation
         if (isJumping) {
             rb.velocity = new Vector2(moveDirection.x, moveDirection.y) * movementSpeed;
         } else {
@@ -73,18 +65,26 @@ public class FrogBehavior : MonoBehaviour
     {
         if (col.gameObject.tag == "Bullet")
         {
-            // take damage
             takeDamage();
             
-            // destroy bullet
             Destroy(col.gameObject);
         }
     }
     
     void OnDestroy()
     {
-        // tell game manager that player earned xp for killing a frog
+        // Tell game manager that player earned xp for killing a frog
         gm.SendMessage("IncrementXP", 1);
+    }
+
+    public void takeDamage()
+    {
+        currentHealth -= 1;
+
+        if (currentHealth <= 0)
+        {
+            Destroy(this.gameObject);
+        }
     }
 }
 

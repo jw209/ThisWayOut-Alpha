@@ -13,6 +13,14 @@ TagManager:
   - GameManager
   - Hearts
   - heart
+  - slot1
+  - slot2
+  - slot3
+  - slot4
+  - slot5
+  - inventory
+  - star
+  - World
   layers:
   - Default
   - TransparentFX

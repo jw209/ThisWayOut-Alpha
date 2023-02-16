@@ -98,6 +98,15 @@ public class GameManager : MonoBehaviour
         UI_health.SendMessage("SetHealth", currentHealth);
     }
 
+    public void UpdateInventory(string name)
+    {
+        Debug.Log(name);
+        if (name == "star")
+        {
+            UI_inventory.SendMessage("AddToInventory", 0, SendMessageOptions.RequireReceiver);
+        }
+    }
+
     private void GameWon()
     {
         // do win logic

@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class SpawnerBehavior : MonoBehaviour
 {
-    public GameObject spawner;
-    private Vector3[] spawnerLocations;
     public int numSpawners;
 
-    // set the location of the spawners
+    private GameObject spawner;
+    private Vector3[] spawnerLocations;
+
     void Awake()
     {
+        // Get the spawner prefab
+        spawner = Resources.Load("Prefabs/Spawners/level_0/spawner_0") as GameObject;
+
         spawnerLocations = new Vector3[numSpawners];
 
         for (int i = 0; i < numSpawners; i++)

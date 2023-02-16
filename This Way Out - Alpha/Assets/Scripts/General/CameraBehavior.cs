@@ -4,58 +4,68 @@ using UnityEngine;
 
 public class CameraBehavior : MonoBehaviour
 {
+    // External factors
     private Transform target;
-    public Transform player;
-    public GameObject world;
+    private Transform player;
+    private GameObject world;
+
+    // Camera options
     public float cameraSpeed;
+    public float xOffset = 11;
+    public float yOffset = 15;
+
+    // Internal variables
     private Vector3 lastPosition; 
     private Vector3 newPos;
     Vector3 mapPosition;
     private float change;
     private float screenCenter;
 
-    private float xOffset = 11;
-    private float yOffset = 15;
+    void Awake()
+    {
+        // Get the screen center
+        screenCenter = Screen.height / 2;
 
-    private Vector3 targetPosNow;
+        // Get the world game object
+        world = GameObject.FindWithTag("World");
 
-    private float changeX;
-    private float changeY;
-
-    private float topEdge;
-    private float bottomEdge;
+        // Get the player transform
+        player = GameObject.FindWithTag("Player").transform;
+    }
 
     void Update()
     {
+        // Initialize map vector to a zero vector so we can check if it has changed later on
         mapPosition = Vector3.zero;
+
+        // Get the map transform
         target = GameObject.FindWithTag("Map").transform;
+
         if (target)
         {
+            // Get the position of where the map should be
             mapPosition = new Vector3(target.position.x+xOffset, target.position.y+yOffset, -10);
         }
+
         if (mapPosition != Vector3.zero)
         {
+            // If map was set, move the camera to map position
             transform.position = Vector3.Lerp(transform.position, mapPosition, cameraSpeed * Time.deltaTime);
         }
 
         if (player)
-        {
-            screenCenter = Screen.height / 2;
-
+        {   
+            // If the player is above the center of the screen, slowly move camera upwards
             if (((player.position.y + screenCenter) - screenCenter) > 20)
             {
-                change = Mathf.Lerp(transform.position.y, player.position.y,
-                                    Time.deltaTime * cameraSpeed+2);
-                transform.position = new Vector3(transform.position.x, 
-                                                change,
-                                                transform.position.z);
-            } else if (((player.position.y + screenCenter) - screenCenter) < 20)
+                change = Mathf.Lerp(transform.position.y, player.position.y, Time.deltaTime * cameraSpeed+2);
+                transform.position = new Vector3(transform.position.x, change, transform.position.z);
+            }
+            // If the player is below the center of the screen, slowly move camera downwards
+            else if (((player.position.y + screenCenter) - screenCenter) < 20)
             {
-                change = Mathf.Lerp(transform.position.y, player.position.y, 
-                                    Time.deltaTime * cameraSpeed+2);
-                transform.position = new Vector3(transform.position.x,
-                                                change,
-                                                transform.position.z);
+                change = Mathf.Lerp(transform.position.y, player.position.y, Time.deltaTime * cameraSpeed+2);
+                transform.position = new Vector3(transform.position.x, change, transform.position.z);
             }
         } 
     }

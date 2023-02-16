@@ -4,26 +4,27 @@ using UnityEngine;
 
 public class PlayerBehavior : MonoBehaviour
 {
-    [SerializeField] private Transform target;
-    [SerializeField] private float guideSpeed;
-    [SerializeField] private GameObject prefab;
-    private Vector3 change;
-    private float bulletCounter;
+    // Game Manager
     private GameObject gm;
+    
+    // Player options
     public float moveSpeed;
+
+    // Animations
     private Animator animator;  
 
     void Awake()
     {   
+        // Get the game manager
         gm = GameObject.FindWithTag("GameManager");
 
-        // get animator
+        // Get the animator
         animator = GetComponent<Animator>();
     }
 
     void Update()
     {   
-        // handle walking movements
+        // Handle walking movements
         if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
         {
             animator.SetBool("isWalking", true);
@@ -32,32 +33,6 @@ public class PlayerBehavior : MonoBehaviour
         else 
         {
             animator.SetBool("isWalking", false);
-        }
-
-
-         // move the guide left
-        if  (Input.GetKey(KeyCode.JoystickButton4))
-        {
-            transform.RotateAround(target.position, new Vector3(0, 0, 1), guideSpeed * Time.deltaTime);
-        }
-        // move the guide right
-        else if (Input.GetKey(KeyCode.JoystickButton5))
-        {   
-            transform.RotateAround(target.position, new Vector3(0, 0, -1), guideSpeed * Time.deltaTime);
-        }
-
-        // fire the projectile
-        if (Input.GetKey(KeyCode.JoystickButton2))
-        {
-            // check if bullet is ready to fire
-            if (bulletCounter == 0)
-                Instantiate(prefab, transform.position, Quaternion.Euler(0, 0, transform.eulerAngles.z));
-            
-            bulletCounter++;
-
-            // reset bullet counter
-            if (bulletCounter == 50)
-                bulletCounter = 0;
         }
     }
 

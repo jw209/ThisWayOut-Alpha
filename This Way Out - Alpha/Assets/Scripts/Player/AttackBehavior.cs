@@ -2,43 +2,54 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveGuide : MonoBehaviour
+public class AttackBehavior : MonoBehaviour
 {
-    [SerializeField] private Transform target;
-    [SerializeField] private float guideSpeed;
-    [SerializeField] private GameObject prefab;
+    // Attack options
+    public float guideSpeed;
+
+    // Player transform
+    private Transform target;
+    
+    // Internal variables
+    private GameObject prefab;
     private Vector3 change;
     private float bulletCounter;
 
     void Awake()
     {
+        // Get the player transform
+        target = GameObject.FindWithTag("Player").transform;
+
+        // Load the star prefab
+        prefab = Resources.Load("Prefabs/Items/Weapons/level_0/star_0") as GameObject;
+
+        // Set the bullet counter
         bulletCounter = 0;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        // move the guide left
+        // Move the guide left
         if  (Input.GetKey(KeyCode.JoystickButton4))
         {
             transform.RotateAround(target.position, new Vector3(0, 0, 1), guideSpeed * Time.deltaTime);
         }
-        // move the guide right
+        // Move the guide right
         else if (Input.GetKey(KeyCode.JoystickButton5))
         {   
             transform.RotateAround(target.position, new Vector3(0, 0, -1), guideSpeed * Time.deltaTime);
         }
 
-        // fire the projectile
+        // Fire the projectile
         if (Input.GetKey(KeyCode.JoystickButton2))
         {
-            // check if bullet is ready to fire
+            // Check if bullet is ready to fire
             if (bulletCounter == 0)
                 Instantiate(prefab, transform.position, Quaternion.Euler(0, 0, transform.eulerAngles.z));
             
             bulletCounter++;
 
-            // reset bullet counter
+            // Reset bullet counter
             if (bulletCounter == 50)
                 bulletCounter = 0;
         }

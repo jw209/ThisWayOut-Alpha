@@ -21,6 +21,7 @@ TagManager:
   - inventory
   - star
   - World
+  - Arrow
   layers:
   - Default
   - TransparentFX

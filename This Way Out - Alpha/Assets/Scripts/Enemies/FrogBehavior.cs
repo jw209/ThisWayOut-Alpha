@@ -14,6 +14,11 @@ public class FrogBehavior : MonoBehaviour
 
     // External factors
     private Transform target;
+    public AudioSource audioSource;
+    public AudioClip[] audioClipArray;
+    public float flashTime = 0.5f;
+    private Color originalColor;
+    private SpriteRenderer renderer;
 
     // Internal variables
     private Rigidbody2D rb;
@@ -24,6 +29,12 @@ public class FrogBehavior : MonoBehaviour
     {   
         // Get the game manager
         gm = GameObject.FindWithTag("GameManager");
+
+        // Get renderer
+        renderer = GetComponent<SpriteRenderer>();
+
+        // Get original color
+        originalColor = renderer.color;
 
         // Get the player's transform
         target = GameObject.FindGameObjectWithTag("Player").transform;
@@ -79,12 +90,25 @@ public class FrogBehavior : MonoBehaviour
 
     public void takeDamage()
     {
+        FlashRed();
         currentHealth -= 1;
+        audioSource.PlayOneShot(audioClipArray[0]);
 
         if (currentHealth <= 0)
         {
             Destroy(this.gameObject);
         }
+    }
+
+    public void FlashRed()
+    {
+        renderer.color = Color.red;
+        Invoke("ResetColor", flashTime);
+    }
+
+    public void ResetColor()
+    {
+        renderer.color = originalColor;
     }
 }
 

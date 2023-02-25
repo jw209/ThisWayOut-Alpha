@@ -14,6 +14,8 @@ public class AttackBehavior : MonoBehaviour
     private GameObject prefab;
     private Vector3 change;
     private float bulletCounter;
+    private Vector3 direction;
+    private Transform pivot;
 
     void Awake()
     {
@@ -28,20 +30,10 @@ public class AttackBehavior : MonoBehaviour
     }
 
     void Update()
-    {
-        // Move the guide left
-        if  (Input.GetKey(KeyCode.JoystickButton4))
-        {
-            transform.RotateAround(target.position, new Vector3(0, 0, 1), guideSpeed * Time.deltaTime);
-        }
-        // Move the guide right
-        else if (Input.GetKey(KeyCode.JoystickButton5))
-        {   
-            transform.RotateAround(target.position, new Vector3(0, 0, -1), guideSpeed * Time.deltaTime);
-        }
-
-        // Fire the projectile
-        if (Input.GetKey(KeyCode.JoystickButton2))
+    {   
+        transform.RotateAround(target.position, new Vector3(0, 0, -Input.GetAxisRaw("RightHoriz")), guideSpeed * Time.deltaTime);
+        
+        if (Input.GetAxisRaw("Fire1") != 0)
         {
             // Check if bullet is ready to fire
             if (bulletCounter == 0)

@@ -47,9 +47,14 @@ public class PlayerBehavior : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.tag == "Frog")
+        if (col.gameObject.tag == "Frog" ||
+            col.gameObject.tag == "Arrow")
         {
             gm.SendMessage("UpdateHealth", -1);
+            if (col.gameObject.tag == "Arrow")
+            {
+                Destroy(col.gameObject);
+            }
         }
     }
 }

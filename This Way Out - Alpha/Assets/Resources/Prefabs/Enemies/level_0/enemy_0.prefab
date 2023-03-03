@@ -196,9 +196,9 @@ MonoBehaviour:
   attackDamage: 1
   currentHealth: 10
   movementSpeed: 5
-  audioSource: {fileID: 5418123807981632515}
   audioClipArray:
   - {fileID: 8300000, guid: e67e53ec9b183f048ab44638a1cca64d, type: 3}
+  flashTime: 0.5
 --- !u!82 &5418123807981632515
 AudioSource:
   m_ObjectHideFlags: 0
@@ -209,8 +209,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 8300000, guid: e67e53ec9b183f048ab44638a1cca64d, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

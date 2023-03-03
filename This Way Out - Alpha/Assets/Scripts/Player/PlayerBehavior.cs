@@ -11,7 +11,11 @@ public class PlayerBehavior : MonoBehaviour
     public float moveSpeed;
 
     // Animations
-    private Animator animator;  
+    private Animator animator;
+
+    // External
+    public AudioSource audioSource;
+    public AudioClip[] audioClipArray;
 
     void Awake()
     {   
@@ -38,6 +42,8 @@ public class PlayerBehavior : MonoBehaviour
 
     void Move() 
     {
+        // play movement sound
+        audioSource.PlayOneShot(audioClipArray[0]);
         float x = Input.GetAxis("Horizontal") * Time.deltaTime * moveSpeed;
         float y = Input.GetAxis("Vertical") * Time.deltaTime * moveSpeed;
         animator.SetFloat("walkHorizontal", x);

@@ -22,7 +22,7 @@ public class Experience : MonoBehaviour
         xp_filler++;
         prefabName = "UI/xp/xpbar_" + xp_filler;
         GameObject prefab = Resources.Load(prefabName) as GameObject;
-        Destroy(instance);
+        if(instance != null) Destroy(instance);
         instance = Instantiate(prefab, transform.position, Quaternion.identity);
         instance.transform.parent = transform;
     }

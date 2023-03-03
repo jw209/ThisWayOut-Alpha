@@ -26,15 +26,15 @@ public class Hearts : MonoBehaviour
 
     void SetHealth(int currentHealth)
     {
-        if (currentHealth == 2)
+        if (currentHealth == 2 && heartC != null)
         {
             Destroy(heartC);
         }
-        else if (currentHealth == 1)
+        else if (currentHealth == 1 && heartB != null)
         {
             Destroy(heartB);
         }
-        else if (currentHealth == 0)
+        else if (currentHealth == 0 && heartA != null)
         {
             Destroy(heartA);
         }

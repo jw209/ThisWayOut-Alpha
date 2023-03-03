@@ -22,6 +22,7 @@ public class GenerateMap : MonoBehaviour
     {
         gm = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
         level = gm.currentLevel;
+        Debug.Log(level);
         GetResourcesAndBuild();
     }
 
@@ -188,12 +189,13 @@ public class GenerateMap : MonoBehaviour
 
         // Generate spawners
         int iter = Random.Range(0, 4);
+        int whichSpawner = Random.Range(0,2);
         for (int i = 0; i < iter; i++)
         {
             int x = Random.Range(0, gridWidth);
             int y = Random.Range(0, gridHeight);
 
-            GameObject obj = Instantiate(spawners[0], this.gameObject.transform.position + new Vector3(x, y, 0), Quaternion.identity);
+            GameObject obj = Instantiate(spawners[whichSpawner], this.gameObject.transform.position + new Vector3(x, y, 0), Quaternion.identity);
             obj.transform.parent = this.gameObject.transform;
 
         }

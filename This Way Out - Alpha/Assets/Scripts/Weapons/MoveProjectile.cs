@@ -27,11 +27,13 @@ public class MoveProjectile : MonoBehaviour
             // Calculate the direction from the arrow's position to the target's position
             Vector3 direction = target.position - transform.position;
 
+            int prediction = Random.Range(1, 3);
+
             // Calculate the angle between the direction and the arrow's forward vector
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
             // Rotate the arrow to point towards the target
-            transform.rotation = Quaternion.AngleAxis(angle-90, Vector3.forward);
+            transform.rotation = Quaternion.AngleAxis(angle-(90+prediction), Vector3.forward);
             rb.AddForce(transform.up * projectileSpeed);
         }
         else

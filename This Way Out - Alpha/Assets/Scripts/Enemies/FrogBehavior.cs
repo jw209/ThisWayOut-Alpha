@@ -84,12 +84,6 @@ public class FrogBehavior : MonoBehaviour
             Destroy(col.gameObject);
         }
     }
-    
-    void OnDestroy()
-    {
-        // Tell game manager that player earned xp for killing a frog
-        gm.SendMessage("IncrementXP", 1);
-    }
 
     public void takeDamage()
     {
@@ -97,10 +91,16 @@ public class FrogBehavior : MonoBehaviour
         currentHealth -= 1;
         audioSource.PlayOneShot(audioClipArray[0]);
 
-        if (currentHealth <= 0)
+        if (currentHealth < 0)
         {
             Destroy(this.gameObject);
         }
+    }
+
+    void OnDestroy()
+    {
+        // Tell game manager that player earned xp for killing a frog
+        gm.SendMessage("IncrementXP", 1);
     }
 
     public void FlashRed()
